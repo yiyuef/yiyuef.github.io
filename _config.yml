@@ -1,6 +1,6 @@
 title: Feng Yiyue
 description: Personal website
-theme: minima
+theme: jekyll-theme-architect
 
 header_pages:
   - about.md
