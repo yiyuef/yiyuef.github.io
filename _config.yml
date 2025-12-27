@@ -1,0 +1,9 @@
+title: Feng Yiyue
+description: Personal website
+theme: minima
+
+# 可选：如果你要在导航栏显示这些页面（minima 用 header_pages）
+header_pages:
+  - about.md
+  - projects.md
+  - publications.md
