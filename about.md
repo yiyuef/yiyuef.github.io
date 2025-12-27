@@ -4,4 +4,4 @@ title: About
 permalink: /about/
 ---
 
-A short bio here.
+Hey my name is Yiyue Feng. Welcome to my page.
