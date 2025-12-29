@@ -1,12 +1,37 @@
 ---
-layout: home
+layout: page
 title: Home
+permalink: /
 ---
 
 Hi, I’m **Feng Yiyue**.
 
-- Research: CFD, high-order methods.
-- GitHub: https://github.com/<yourname>
-- Email: <yiyuef@uci.edu>
+This website is a place where I keep my academic notes and personal writings.
 
-Let's go Worriers.
+---
+
+## About
+A brief introduction about my background, research interests, and how to contact me.
+
+→ [About](/about/)
+
+---
+
+## Notes
+Structured notes and thoughts related to my academic work, including ideas, derivations, and paper reading.
+
+→ [Notes](/notes/)
+
+---
+
+## Blog
+Personal, non-academic writings — reflections, records, and occasional long-form thoughts.
+
+→ [Blog](/blog/)
+
+---
+
+## Shoes
+A small archive of my shoes, with photos and personal notes.
+
+→ [Shoes](/shoes/)

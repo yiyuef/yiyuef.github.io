@@ -2,10 +2,12 @@ title: Feng Yiyue
 description: Personal website
 theme: minima
 
+# 顶部导航（你真正需要的）
 header_pages:
   - about.md
-  - projects.md
+  - notes.md
   - blog.md
+  - shoes.md
 
-# 可选：让博文链接更像博客
-permalink: /blog/:year/:month/:day/:title/
+# 默认 permalink（先别强行 blog 风格）
+permalink: pretty
