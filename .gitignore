@@ -1,0 +1,12 @@
+# --- Python ---
+code/.venv/
+code/__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+
+*.png
+.DS_Store
+Thumbs.db
