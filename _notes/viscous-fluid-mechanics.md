@@ -13,4 +13,18 @@ Possible topics:
 - Viscous dissipation  
 - Boundary layers and scaling arguments  
 
-(Under active development)
+<hr>
+
+<h2>PDF</h2>
+
+<iframe
+  src="{{ '/assets/pdfs/viscous-fluid-mechanics.pdf' | relative_url }}"
+  width="100%"
+  height="900"
+  style="border:1px solid #ddd; border-radius: 8px;"
+></iframe>
+
+<p>
+  If the preview doesn't load, open it here:
+  <a href="{{ '/assets/pdfs/viscous-fluid-mechanics.pdf' | relative_url }}">PDF link</a>
+</p>
