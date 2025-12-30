@@ -1,95 +1,244 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Feng Yiyue</title>
-  <style>
-    :root { --max: 920px; }
-    body{
-      margin:0;
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:#111;
-      background:#fff;
-    }
-    .wrap{
-      width:min(var(--max), calc(100vw - 48px));
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:28px;
-    }
-    .logo{
-      width:min(720px, 100%);
-      height:auto;
-      display:block;
-    }
-    .nav{
-      width:min(680px, 100%);
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap:16px;
-    }
-    a.tile{
-      text-decoration:none;
-      color:inherit;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:10px;
-      padding:12px 6px;
-      border-radius:14px;
-    }
-    a.tile:hover{ background: rgba(0,0,0,0.04); }
-    .shape{
-      width:64px;
-      height:40px;
-      border:4px solid #000;
-      border-radius:10px;
-      box-sizing:border-box;
-    }
-    .label{
-      font-size:14px;
-      letter-spacing:0.12em;
-      text-transform:uppercase;
-    }
+#!/usr/bin/env python3
+"""
+Parametric flat logo generator (FENG). SVG-first (vector, crisp).
+G is drawn in the user's intended style:
+  - a separate left stem
+  - a right "open-rectangle" spiral with a bottom-left gap + an inner notch
+"""
 
-    /* 手机端：两行两列 */
-    @media (max-width: 520px){
-      .nav{ grid-template-columns: repeat(2, 1fr); }
-    }
-  </style>
-</head>
+from __future__ import annotations
+from dataclasses import dataclass
+from typing import List, Tuple
+import argparse
+import svgwrite
 
-<body>
-  <main class="wrap">
-    <img class="logo" src="/assets/img/logo.png" alt="FENG / MIKE logo" />
+Point = Tuple[float, float]
 
-    <nav class="nav" aria-label="Main">
-      <a class="tile" href="/about/">
-        <div class="shape" aria-hidden="true"></div>
-        <div class="label">About</div>
-      </a>
 
-      <a class="tile" href="/notes/">
-        <div class="shape" aria-hidden="true"></div>
-        <div class="label">Notes</div>
-      </a>
+@dataclass(frozen=True)
+class LogoParams:
+    # Canvas / style
+    height: float = 200.0
+    stroke: float = 22.0
+    margin: float = 28.0
+    stroke_color: str = "#000000"
+    cap: str = "round"      # round / square / butt
+    join: str = "round"     # round / bevel / miter
 
-      <a class="tile" href="/blog/">
-        <div class="shape" aria-hidden="true"></div>
-        <div class="label">Blog</div>
-      </a>
+    # Width rules
+    letter_w: float = 280.0     # F/E/G same width
+    n_ratio: float = 0.5        # N width = letter_w * n_ratio
+    gap_ratio: float = 2.0      # spacing in multiples of stroke
 
-      <a class="tile" href="/shoes/">
-        <div class="shape" aria-hidden="true"></div>
-        <div class="label">Shoes</div>
-      </a>
-    </nav>
-  </main>
-</body>
-</html>
+    # Common vertical layout inside letter box
+    y_top_ratio: float = 0.20
+    y_mid_ratio: float = 0.50
+    y_bot_ratio: float = 0.80
+
+    # F bar lengths (ratios of letter width)
+    f_top: float = 1.00
+    f_mid: float = 0.88
+    f_bot: float = 0.50
+
+    # E bar lengths
+    e_short: float = 0.40
+    e_mid: float = 1.00
+
+    # --- G (USER STYLE) parameters ---
+    # Left stem x-position (ratio of G width)
+    g_stem_x_ratio: float = 0.10
+
+    # Right spiral rectangle left x-position (ratio of G width)
+    g_rect_left_ratio: float = 0.28
+
+    # Bottom-left gap size on the spiral bottom edge (ratio of rect width)
+    g_bottom_gap_ratio: float = 0.22
+
+    # Inner notch (a short vertical drop from the top edge)
+    g_notch_x_ratio: float = 0.40       # position along the rect width (from rect_left)
+    g_notch_depth_ratio: float = 0.42   # depth relative to usable height
+
+
+def _path_d(points: List[Point]) -> str:
+    if len(points) < 2:
+        raise ValueError("Need at least 2 points for a path.")
+    d = [f"M {points[0][0]:.3f} {points[0][1]:.3f}"]
+    for x, y in points[1:]:
+        d.append(f"L {x:.3f} {y:.3f}")
+    return " ".join(d)
+
+
+def add_stroke(dwg: svgwrite.Drawing, points: List[Point], p: LogoParams) -> None:
+    dwg.add(
+        dwg.path(
+            d=_path_d(points),
+            fill="none",
+            stroke=p.stroke_color,
+            stroke_width=p.stroke,
+            stroke_linecap=p.cap,
+            stroke_linejoin=p.join,
+        )
+    )
+
+
+def letter_F(dwg: svgwrite.Drawing, p: LogoParams, origin: Point, w: float, h: float) -> None:
+    ox, oy = origin
+    y1 = oy + p.y_top_ratio * h
+    y2 = oy + p.y_mid_ratio * h
+    y3 = oy + p.y_bot_ratio * h
+
+    add_stroke(dwg, [(ox, y1), (ox + p.f_top * w, y1)], p)
+    add_stroke(dwg, [(ox, y2), (ox + p.f_mid * w, y2)], p)
+    add_stroke(dwg, [(ox, y3), (ox + p.f_bot * w, y3)], p)
+
+
+def letter_E(dwg: svgwrite.Drawing, p: LogoParams, origin: Point, w: float, h: float) -> None:
+    ox, oy = origin
+    y1 = oy + p.y_top_ratio * h
+    y2 = oy + p.y_mid_ratio * h
+    y3 = oy + p.y_bot_ratio * h
+
+    # spine
+    add_stroke(dwg, [(ox, y1), (ox, y3)], p)
+
+    # bars
+    add_stroke(dwg, [(ox, y1), (ox + p.e_short * w, y1)], p)
+    add_stroke(dwg, [(ox, y2), (ox + p.e_mid * w, y2)], p)
+    add_stroke(dwg, [(ox, y3), (ox + p.e_short * w, y3)], p)
+
+
+def letter_N_arch(dwg: svgwrite.Drawing, p: LogoParams, origin: Point, w: float, h: float) -> None:
+    ox, oy = origin
+    yT = oy + p.y_top_ratio * h
+    yB = oy + p.y_bot_ratio * h
+
+    add_stroke(dwg, [(ox, yB), (ox, yT)], p)           # left vertical
+    add_stroke(dwg, [(ox, yT), (ox + w, yT)], p)       # top bar
+    add_stroke(dwg, [(ox + w, yT), (ox + w, yB)], p)   # right vertical
+
+
+def letter_G_user_style(dwg: svgwrite.Drawing, p: LogoParams, origin: Point, w: float, h: float) -> None:
+    """
+    User's intended 'lying G':
+      1) a separate left stem (vertical only)
+      2) a right open-rectangle spiral:
+         - top edge (rect_left -> rect_right)
+         - right edge down
+         - bottom edge back left but with a bottom-left GAP (doesn't reach rect_left)
+         - plus an inner notch dropping down from the top edge
+    """
+    ox, oy = origin
+    yT = oy + p.y_top_ratio * h
+    yB = oy + p.y_bot_ratio * h
+    usable_h = yB - yT
+
+    # (1) left stem (separate)
+    stem_x = ox + p.g_stem_x_ratio * w
+    add_stroke(dwg, [(stem_x, yT), (stem_x, yB)], p)
+
+    # (2) right spiral rectangle geometry
+    rect_left = ox + p.g_rect_left_ratio * w
+    rect_right = ox + w
+
+    rect_w = rect_right - rect_left
+    bottom_gap = p.g_bottom_gap_ratio * rect_w
+    bottom_start = rect_left + bottom_gap   # leave a gap at bottom-left
+
+    # outer spiral: top -> right -> bottom (partial)
+    outer = [
+        (rect_left, yT),
+        (rect_right, yT),
+        (rect_right, yB),
+        (bottom_start, yB),
+    ]
+    add_stroke(dwg, outer, p)
+
+    # inner notch: from top edge downward
+    notch_x = rect_left + p.g_notch_x_ratio * rect_w
+    notch_depth = p.g_notch_depth_ratio * usable_h
+    add_stroke(dwg, [(notch_x, yT), (notch_x, yT + notch_depth)], p)
+
+
+def build_logo(p: LogoParams, out_svg: str, export_png: bool) -> None:
+    wF = p.letter_w
+    wE = p.letter_w
+    wN = p.letter_w * p.n_ratio
+    wG = p.letter_w
+
+    gap = p.gap_ratio * p.stroke
+    H = p.height
+    box_h = H - 2 * p.margin
+
+    total_w = 2 * p.margin + (wF + gap + wE + gap + wN + gap + wG)
+
+    dwg = svgwrite.Drawing(out_svg, size=(total_w, H))
+    dwg.viewbox(0, 0, total_w, H)
+
+    x = p.margin
+    y = p.margin
+
+    letter_F(dwg, p, (x, y), wF, box_h)
+    x += wF + gap
+
+    letter_E(dwg, p, (x, y), wE, box_h)
+    x += wE + gap
+
+    letter_N_arch(dwg, p, (x, y), wN, box_h)
+    x += wN + gap
+
+    letter_G_user_style(dwg, p, (x, y), wG, box_h)
+
+    dwg.save()
+    print(f"Saved SVG: {out_svg}")
+
+    if export_png:
+        try:
+            import cairosvg  # type: ignore
+            out_png = out_svg.rsplit(".", 1)[0] + ".png"
+            cairosvg.svg2png(url=out_svg, write_to=out_png, output_width=int(total_w * 2))
+            print(f"Saved PNG: {out_png}")
+        except Exception as e:
+            print("PNG export skipped (needs cairo/cairosvg):", e)
+
+
+def parse_args() -> argparse.Namespace:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", default="logo.svg", help="Output SVG path.")
+    ap.add_argument("--png", action="store_true", help="Also export PNG preview (requires cairosvg + cairo).")
+
+    ap.add_argument("--height", type=float, default=200.0)
+    ap.add_argument("--stroke", type=float, default=22.0)
+    ap.add_argument("--letterw", type=float, default=280.0)
+    ap.add_argument("--nratio", type=float, default=0.5)
+    ap.add_argument("--gapratio", type=float, default=2.0)
+
+    # G tuning knobs (so you can match your hand-drawn precisely without editing code)
+    ap.add_argument("--g_stem_x", type=float, default=0.10)
+    ap.add_argument("--g_rect_left", type=float, default=0.28)
+    ap.add_argument("--g_bottom_gap", type=float, default=0.22)
+    ap.add_argument("--g_notch_x", type=float, default=0.40)
+    ap.add_argument("--g_notch_depth", type=float, default=0.42)
+
+    return ap.parse_args()
+
+
+def main() -> None:
+    a = parse_args()
+    p = LogoParams(
+        height=a.height,
+        stroke=a.stroke,
+        letter_w=a.letterw,
+        n_ratio=a.nratio,
+        gap_ratio=a.gapratio,
+
+        g_stem_x_ratio=a.g_stem_x,
+        g_rect_left_ratio=a.g_rect_left,
+        g_bottom_gap_ratio=a.g_bottom_gap,
+        g_notch_x_ratio=a.g_notch_x,
+        g_notch_depth_ratio=a.g_notch_depth,
+    )
+    build_logo(p, out_svg=a.out, export_png=a.png)
+
+
+if __name__ == "__main__":
+    main()

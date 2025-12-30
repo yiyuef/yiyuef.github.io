@@ -4,8 +4,13 @@ title: Notes
 permalink: /notes/
 ---
 
-This section is under development.
+These are evolving research and study notes.
 
-I plan to use this space to organize my academic notes and thoughts, including ideas, derivations, and reading notes related to my research.
-
-Please check back later.
+{% assign notes = site.notes | sort: "date" | reverse %}
+<ul>
+  {% for n in notes %}
+    <li>
+      <a href="{{ n.url | relative_url }}">{{ n.title }}</a>
+    </li>
+  {% endfor %}
+</ul>

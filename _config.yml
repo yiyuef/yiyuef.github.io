@@ -11,3 +11,8 @@ header_pages:
 
 # 默认 permalink（先别强行 blog 风格）
 permalink: pretty
+
+collections:
+  notes:
+    output: true
+    permalink: /notes/:name/
