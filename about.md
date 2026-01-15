@@ -19,10 +19,6 @@ I use this website to organize my academic notes and thoughts, and to keep some 
 
 ---
 
-## Academic Background
-- PhD student, *[Your University / Institution]*  
-- Background in engineering mechanics and mechanical engineering
-
 ---
 
 ## Links
