@@ -56,32 +56,32 @@ permalink: /shoes/
   <!-- 封面（点它打开画廊） -->
   <a
     class="shoe-card glightbox"
-    href="{{ '/assets/img/shoes/kobe-x/1.jpg' | relative_url }}"
+    href="{{ '/assets/img/shoes/kobe-x/1.JPG' | relative_url }}"
     data-gallery="kobe-x"
     data-title="Kobe X"
   >
-    <img src="{{ '/assets/img/shoes/kobe-x/1.jpg' | relative_url }}" alt="Kobe X cover">
+    <img src="{{ '/assets/img/shoes/kobe-x/1.JPG' | relative_url }}" alt="Kobe X cover">
     <span class="shoe-label">Kobe X</span>
   </a>
 
   <!-- 其余图片：不在页面摊开，但会进入同一画廊，可左右滑动 -->
   <a class="glightbox" style="display:none"
-     href="{{ '/assets/img/shoes/kobe-x/2.jpg' | relative_url }}"
+     href="{{ '/assets/img/shoes/kobe-x/2.JPG' | relative_url }}"
      data-gallery="kobe-x"
      data-title="Kobe X"></a>
 
   <a class="glightbox" style="display:none"
-     href="{{ '/assets/img/shoes/kobe-x/3.jpg' | relative_url }}"
+     href="{{ '/assets/img/shoes/kobe-x/3.JPG' | relative_url }}"
      data-gallery="kobe-x"
      data-title="Kobe X"></a>
 
   <a class="glightbox" style="display:none"
-     href="{{ '/assets/img/shoes/kobe-x/4.jpg' | relative_url }}"
+     href="{{ '/assets/img/shoes/kobe-x/4.JPG' | relative_url }}"
      data-gallery="kobe-x"
      data-title="Kobe X"></a>
 
   <a class="glightbox" style="display:none"
-     href="{{ '/assets/img/shoes/kobe-x/5.jpg' | relative_url }}"
+     href="{{ '/assets/img/shoes/kobe-x/5.JPG' | relative_url }}"
      data-gallery="kobe-x"
      data-title="Kobe X"></a>
 
