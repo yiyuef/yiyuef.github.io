@@ -19,8 +19,6 @@ I use this website to organize my academic notes and thoughts, and to keep some 
 
 ---
 
----
-
 ## Links
 - Email: `yiyuef@uci.com`
 <!-- - GitHub: https://github.com/yourname -->
