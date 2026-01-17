@@ -184,6 +184,60 @@ permalink: /shoes/
   </div>
 
   <!-- 以后加新鞋：复制“button + div.expand”，把 data-target / id / 图片路径换掉即可 -->
+  <!-- ================= Vomero Plus（封面：展开/收起） ================= -->
+  <button
+    class="shoe-card shoe-toggle"
+    type="button"
+    data-target="vomero-plus"
+    aria-expanded="false"
+    aria-controls="expand-vomero-plus"
+  >
+    <img src="{{ '/assets/img/shoes/vomero-plus/1.HEIC' | relative_url }}" alt="Vomero Plus cover">
+    <span class="shoe-count">5</span>
+    <span class="shoe-label">Vomero Plus</span>
+  </button>
+
+  <div class="shoe-expand" id="expand-vomero-plus" hidden>
+    <p class="expand-hint">Click a thumbnail to view large.</p>
+
+    <div class="thumb-row">
+      <a class="thumb glightbox"
+        href="{{ '/assets/img/shoes/vomero-plus/1.HEIC' | relative_url }}"
+        data-gallery="vomero-plus"
+        data-title="Vomero Plus"
+        <img src="{{ '/assets/img/shoes/vomero-plus/1.HEIC' | relative_url }}" alt="Vomero Plus 1">
+      </a>
+
+      <a class="thumb glightbox"
+        href="{{ '/assets/img/shoes/vomero-plus/2.HEIC' | relative_url }}"
+        data-gallery="vomero-plus"
+        data-title="Vomero Plus"
+        <img src="{{ '/assets/img/shoes/vomero-plus/2.HEIC' | relative_url }}" alt="Vomero Plus 2">
+      </a>
+
+      <a class="thumb glightbox"
+        href="{{ '/assets/img/shoes/vomero-plus/3.HEIC' | relative_url }}"
+        data-gallery="vomero-plus"
+        data-title="Vomero Plus"
+        <img src="{{ '/assets/img/shoes/vomero-plus/3.HEIC' | relative_url }}" alt="Vomero Plus 3">
+      </a>
+
+      <a class="thumb glightbox"
+        href="{{ '/assets/img/shoes/vomero-plus/4.HEIC' | relative_url }}"
+        data-gallery="vomero-plus"
+        data-title="Vomero Plus"
+        <img src="{{ '/assets/img/shoes/vomero-plus/4.HEIC' | relative_url }}" alt="Vomero Plus 4">
+      </a>
+
+      <a class="thumb glightbox"
+        href="{{ '/assets/img/shoes/vomero-plus/5.HEIC' | relative_url }}"
+        data-gallery="vomero-plus"
+        data-title="Vomero Plus"
+        <img src="{{ '/assets/img/shoes/vomero-plus/5.HEIC' | relative_url }}" alt="Vomero Plus 5">
+      </a>
+    </div>
+  </div>
+
 
 </div>
 
