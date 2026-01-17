@@ -192,7 +192,7 @@ permalink: /shoes/
     aria-expanded="false"
     aria-controls="expand-vomero-plus"
   >
-    <img src="{{ '/assets/img/shoes/vomero-plus/1.HEIC' | relative_url }}" alt="Vomero Plus cover">
+    <img src="{{ '/assets/img/shoes/vomero-plus/1.JPG' | relative_url }}" alt="Vomero Plus cover">
     <span class="shoe-count">5</span>
     <span class="shoe-label">Vomero Plus</span>
   </button>
@@ -202,41 +202,42 @@ permalink: /shoes/
 
     <div class="thumb-row">
       <a class="thumb glightbox"
-        href="{{ '/assets/img/shoes/vomero-plus/1.HEIC' | relative_url }}"
+        href="{{ '/assets/img/shoes/vomero-plus/1.JPG' | relative_url }}"
         data-gallery="vomero-plus"
-        data-title="Vomero Plus"
-        <img src="{{ '/assets/img/shoes/vomero-plus/1.HEIC' | relative_url }}" alt="Vomero Plus 1">
+        data-title="Vomero Plus">
+        <img src="{{ '/assets/img/shoes/vomero-plus/1.JPG' | relative_url }}" alt="Vomero Plus 1">
       </a>
 
       <a class="thumb glightbox"
-        href="{{ '/assets/img/shoes/vomero-plus/2.HEIC' | relative_url }}"
+        href="{{ '/assets/img/shoes/vomero-plus/2.JPG' | relative_url }}"
         data-gallery="vomero-plus"
-        data-title="Vomero Plus"
-        <img src="{{ '/assets/img/shoes/vomero-plus/2.HEIC' | relative_url }}" alt="Vomero Plus 2">
+        data-title="Vomero Plus">
+        <img src="{{ '/assets/img/shoes/vomero-plus/2.JPG' | relative_url }}" alt="Vomero Plus 2">
       </a>
 
       <a class="thumb glightbox"
-        href="{{ '/assets/img/shoes/vomero-plus/3.HEIC' | relative_url }}"
+        href="{{ '/assets/img/shoes/vomero-plus/3.JPG' | relative_url }}"
         data-gallery="vomero-plus"
-        data-title="Vomero Plus"
-        <img src="{{ '/assets/img/shoes/vomero-plus/3.HEIC' | relative_url }}" alt="Vomero Plus 3">
+        data-title="Vomero Plus">
+        <img src="{{ '/assets/img/shoes/vomero-plus/3.JPG' | relative_url }}" alt="Vomero Plus 3">
       </a>
 
       <a class="thumb glightbox"
-        href="{{ '/assets/img/shoes/vomero-plus/4.HEIC' | relative_url }}"
+        href="{{ '/assets/img/shoes/vomero-plus/4.JPG' | relative_url }}"
         data-gallery="vomero-plus"
-        data-title="Vomero Plus"
-        <img src="{{ '/assets/img/shoes/vomero-plus/4.HEIC' | relative_url }}" alt="Vomero Plus 4">
+        data-title="Vomero Plus">
+        <img src="{{ '/assets/img/shoes/vomero-plus/4.JPG' | relative_url }}" alt="Vomero Plus 4">
       </a>
 
       <a class="thumb glightbox"
-        href="{{ '/assets/img/shoes/vomero-plus/5.HEIC' | relative_url }}"
+        href="{{ '/assets/img/shoes/vomero-plus/5.JPG' | relative_url }}"
         data-gallery="vomero-plus"
-        data-title="Vomero Plus"
-        <img src="{{ '/assets/img/shoes/vomero-plus/5.HEIC' | relative_url }}" alt="Vomero Plus 5">
+        data-title="Vomero Plus">
+        <img src="{{ '/assets/img/shoes/vomero-plus/5.JPG' | relative_url }}" alt="Vomero Plus 5">
       </a>
     </div>
   </div>
+
 
 
 </div>
